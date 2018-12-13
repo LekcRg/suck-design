@@ -17,6 +17,8 @@
         justify-content: center;
         width: 100%;
         height: 100%;
+        transition: all 0.5s ease;
+        background-position: 0;
       }
 
       h1 {
@@ -29,5 +31,17 @@
       }
     </style>
     <h1>Test text</h1>
+
+    <script>
+      let body = document.querySelectorAll('body'),
+        bgp = 0;
+
+      setInterval(() => {
+        document.body.style.backgroundPosition = `${Math.random() *
+          1000}px ${Math.random() * 1000}px`;
+        bgp += 200;
+        console.log(bgp);
+      }, 500);
+    </script>
   </body>
 </html>
