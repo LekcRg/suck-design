@@ -12,11 +12,15 @@
       html {
         padding: 0;
         margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100%;
         height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         transition: all 0.5s ease;
         background-position: 0;
       }
@@ -29,14 +33,58 @@
         margin: 0;
         padding: 0;
       }
+
+      input {
+        font-size: 50px;
+        padding: 10px;
+        text-align: center;
+        background: transparent;
+        border: none;
+        outline: none;
+      }
+
+      input::placeholder {
+        opacity: 0.2;
+      }
+
+      .row {
+        width: 100%;
+        display: flex;
+      }
+
+      .btn {
+        font-size: 50px;
+        cursor: pointer;
+      }
     </style>
     <h1>Test text</h1>
+
+    <!--
+      <div class="row">
+        <input type="text" placeholder="Text for dance" />
+        <div class="btn">💃</div>
+      </div>
+    -->
 
     <script>
       setInterval(() => {
         document.body.style.backgroundPosition = `${Math.random() *
           1000}px ${Math.random() * 1000}px`;
+        document.body.style.backgroundColor = getRandomColor();
       }, 500);
+
+      // document.querySelectorAll('.btn').addEventListener('click', () => {
+      //   console.log(document.querySelector('input').value);
+      // });
+
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
     </script>
   </body>
 </html>
