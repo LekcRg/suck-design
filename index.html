@@ -14,14 +14,16 @@
         margin: 0;
         width: 100%;
         height: 100%;
+        overflow: hidden;
       }
 
       body {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transition: all 0.5s ease;
+        transition: all 0.5s linear;
         background-position: 0;
       }
 
@@ -32,6 +34,18 @@
         color: darkcyan;
         margin: 0;
         padding: 0;
+        font-weight: 600;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s linear;
+      }
+
+      h1.active {
+        opacity: 1;
+      }
+
+      h1 span {
+        transition: all 0.2s linear;
       }
 
       input {
@@ -41,15 +55,33 @@
         background: transparent;
         border: none;
         outline: none;
+        font-weight: 600;
+        color: darkcyan;
+        transition: opacity 0.2s linear;
       }
 
       input::placeholder {
-        opacity: 0.2;
+        opacity: 0.5;
       }
 
       .row {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: flex;
         width: 100%;
         display: flex;
+        transition: opacity 0.2s linear;
+      }
+
+      .row.hide {
+        opacity: 0;
+        pointer-events: none;
       }
 
       .btn {
@@ -59,12 +91,10 @@
     </style>
     <h1>Test text</h1>
 
-    <!--
-      <div class="row">
-        <input type="text" placeholder="Text for dance" />
-        <div class="btn">💃</div>
-      </div>
-    -->
+    <div class="row">
+      <input type="text" placeholder="Text for dance" />
+      <div class="btn">💃</div>
+    </div>
 
     <script>
       setInterval(() => {
@@ -73,9 +103,39 @@
         document.body.style.backgroundColor = getRandomColor();
       }, 500);
 
-      // document.querySelectorAll('.btn').addEventListener('click', () => {
-      //   console.log(document.querySelector('input').value);
-      // });
+      let btn = document.querySelector('.btn'),
+        title = document.querySelector('h1');
+
+      btn.addEventListener('click', () => {
+        let value = document.querySelector('input').value,
+          text = '';
+
+        title.innerHTML = '';
+        value.split('').forEach(el => {
+          let newSpan = document.createElement('span');
+
+          newSpan.innerText = el;
+          newSpan.style.position = 'absolute';
+          title.append(newSpan);
+        });
+
+        document.querySelector('.row').classList.add('hide');
+        title.classList.add('active');
+        dance();
+      });
+
+      function dance() {
+        let spans = title.childNodes;
+
+        spans.forEach(el => {
+          setInterval(() => {
+            el.style.left = `${Number(Math.random() * 90)}%`;
+            el.style.top = `${Number(Math.random() * 90)}%`;
+            el.style.transform = `scale(${Number(Math.random() * 5)})`;
+            el.style.color = getRandomColor();
+          }, 200);
+        });
+      }
 
       function getRandomColor() {
         var letters = '0123456789ABCDEF';
