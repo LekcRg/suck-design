@@ -5,90 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>suck</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body style="background-image: url(./hmm.svg); background-size: 150px;">
-    <style>
-      body,
-      html {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      body {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.5s linear;
-        background-position: 0;
-      }
-
-      h1 {
-        background: transparent;
-        font-family: Arial;
-        font-size: 50px;
-        color: darkcyan;
-        margin: 0;
-        padding: 0;
-        font-weight: 600;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s linear;
-      }
-
-      h1.active {
-        opacity: 1;
-      }
-
-      h1 span {
-        transition: all 0.2s linear;
-      }
-
-      input {
-        font-size: 50px;
-        padding: 10px;
-        text-align: center;
-        background: transparent;
-        border: none;
-        outline: none;
-        font-weight: 600;
-        color: darkcyan;
-        transition: opacity 0.2s linear;
-      }
-
-      input::placeholder {
-        opacity: 0.5;
-      }
-
-      .row {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        width: 100%;
-        display: flex;
-        transition: opacity 0.2s linear;
-      }
-
-      .row.hide {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .btn {
-        font-size: 50px;
-        cursor: pointer;
-      }
-    </style>
+    <style></style>
     <h1>Test text</h1>
 
     <div class="row">
@@ -98,58 +18,6 @@
 
     <audio class="music" loop><source src="./sound.mp3" /></audio>
 
-    <script>
-      setInterval(() => {
-        document.body.style.backgroundPosition = `${Math.random() *
-          1000}px ${Math.random() * 1000}px`;
-        document.body.style.backgroundColor = getRandomColor();
-      }, 500);
-
-      let btn = document.querySelector('.btn'),
-        title = document.querySelector('h1');
-
-      btn.addEventListener('click', () => {
-        let value = document.querySelector('input').value,
-          music = document.querySelector('.music'),
-          text = '';
-
-        music.play();
-
-        title.innerHTML = '';
-        value.split('').forEach(el => {
-          let newSpan = document.createElement('span');
-
-          newSpan.innerText = el;
-          newSpan.style.position = 'absolute';
-          title.append(newSpan);
-        });
-
-        document.querySelector('.row').classList.add('hide');
-        title.classList.add('active');
-        dance();
-      });
-
-      function dance() {
-        let spans = title.childNodes;
-
-        spans.forEach(el => {
-          setInterval(() => {
-            el.style.left = `${Number(Math.random() * 90)}%`;
-            el.style.top = `${Number(Math.random() * 90)}%`;
-            el.style.transform = `scale(${Number(Math.random() * 5)})`;
-            el.style.color = getRandomColor();
-          }, 200);
-        });
-      }
-
-      function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-    </script>
+    <script src="./main.js"></script>
   </body>
 </html>
