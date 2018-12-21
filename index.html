@@ -96,6 +96,8 @@
       <div class="btn">💃</div>
     </div>
 
+    <audio class="music" loop><source src="./sound.mp3" /></audio>
+
     <script>
       setInterval(() => {
         document.body.style.backgroundPosition = `${Math.random() *
@@ -108,7 +110,10 @@
 
       btn.addEventListener('click', () => {
         let value = document.querySelector('input').value,
+          music = document.querySelector('.music'),
           text = '';
+
+        music.play();
 
         title.innerHTML = '';
         value.split('').forEach(el => {
