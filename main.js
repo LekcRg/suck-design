@@ -1,14 +1,21 @@
 let btn = document.querySelector('.btn'),
-  title = document.querySelector('h1');
+  title = document.querySelector('h1'),
+  bgTime = 500,
+  input = document.querySelector('input');
 
-setInterval(() => {
+bgInterval = setInterval(() => {
   document.body.style.backgroundPosition = `${Math.random() *
     1000}px ${Math.random() * 1000}px`;
   document.body.style.backgroundColor = getRandomColor();
-}, 500);
+}, bgTime);
 
-btn.addEventListener('click', () => {
-  let value = document.querySelector('input').value,
+btn.addEventListener('click', () => start());
+input.addEventListener('keyup', ev => {
+  if (ev.keyCode === 13) start();
+});
+
+const start = () => {
+  let value = input.value,
     music = document.querySelector('.music'),
     text = '';
 
@@ -26,7 +33,7 @@ btn.addEventListener('click', () => {
   document.querySelector('.row').classList.add('hide');
   title.classList.add('active');
   dance();
-});
+};
 
 function dance() {
   let spans = title.childNodes;
@@ -35,10 +42,22 @@ function dance() {
     setInterval(() => {
       el.style.left = `${Number(Math.random() * 90)}%`;
       el.style.top = `${Number(Math.random() * 90)}%`;
-      el.style.transform = `scale(${Number(Math.random() * 5)})`;
       el.style.color = getRandomColor();
     }, 200);
+
+    colorInterval = setInterval(() => {}, 200);
   });
+
+  setTimeout(() => {
+    bgInterval.stop;
+    spans.forEach(el => {
+      setInterval(() => {
+        el.style.transform = `scale(${Number(
+          Math.random() * 5
+        )}) rotate(${Number(Math.random() * 1000)}deg)`;
+      }, 200);
+    });
+  }, 5500);
 }
 
 function getRandomColor() {
